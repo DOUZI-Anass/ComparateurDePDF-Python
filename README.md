@@ -41,7 +41,8 @@ L’application propose une interface intuitive permettant de :
 ```bash
 git clone https://github.com/TON-USERNAME/ComparateurDePDF.git
 cd ComparateurDePDF
-2.Lancer l’interface :
+```
+2. Lancer l’interface :
 python interface.py
 
 ## Utilisation (exécutable)
@@ -62,13 +63,13 @@ Assurez-vous de ne pas y laisser de fichiers importants.
 ---
 
 ## Structure du projet
-
+```
 ComparateurDePDF/
 ├── main.py
 ├── interface.py
 ├── README.md
 └── .gitignore
-
+```
 ---
 
 ## Améliorations possibles
