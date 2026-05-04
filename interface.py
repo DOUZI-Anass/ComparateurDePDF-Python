@@ -21,8 +21,8 @@ def lancerTraitement():
     if cheminResultat == "" or cheminTemp =="" or cheminTot=="":
         labelFinal.config(text="Veuiller selectionner tout les dossiers")
         return
-    pdfCopier = main.traiter_pdf(cheminTot,cheminTemp,cheminResultat)
-    labelFinal.config(text=str(len(pdfCopier))+"PDF copié")
+    pdfCopier, nbDoublons = main.traiter_pdf(cheminTot,cheminTemp,cheminResultat)
+    labelFinal.config(text=str(len(pdfCopier))+" PDF copié \n et \n"+str(nbDoublons)+" doublons détectés")
 
 
 fenetre = tk.Tk()

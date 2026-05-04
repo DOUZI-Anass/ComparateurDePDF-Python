@@ -36,6 +36,7 @@ def PrepareListTotal(lstTot, path):
 
 def trouver_nouveaux_pdf(PDF_temporaire,cheminTemp,lstTotal):
     ListePDF_a_Copier=[]
+    nb_doublons = 0
     for i in PDF_temporaire:
         chemin = os.path.join(cheminTemp,i)
         sizeTemp = os.path.getsize(chemin)
@@ -48,7 +49,9 @@ def trouver_nouveaux_pdf(PDF_temporaire,cheminTemp,lstTotal):
             if hashh not in lstTotal[sizeTemp] : 
                 lstTotal[sizeTemp].add(hashh)
                 ListePDF_a_Copier.append(i)
-    return ListePDF_a_Copier
+            else:
+                nb_doublons += 1
+    return ListePDF_a_Copier, nb_doublons
 
 
 def copiePDF(ListePDF_a_Copier,cheminTemp,destination_Resultat,destination_total):
@@ -79,23 +82,24 @@ def traiter_pdf(cheminTOT,cheminTemp,cheminResultat):
 
     index_total = PrepareListTotal(lstTot,cheminTOT)
 
-    ListePDF_a_Copier = trouver_nouveaux_pdf(PDF_temporaire,cheminTemp,index_total)          
+    ListePDF_a_Copier, doublon = trouver_nouveaux_pdf(PDF_temporaire,cheminTemp,index_total)          
 
     copiePDF(ListePDF_a_Copier,cheminTemp,cheminResultat,cheminTOT)
        
     viderDossierTemporaire(lstTempBeforeFiltre,cheminTemp)
 
-    return ListePDF_a_Copier
+    return ListePDF_a_Copier, doublon
 
 
 def main():
-    pdf_copies = traiter_pdf(
+    pdf_copies, nbDoublon = traiter_pdf(
         "dossier_total",
         "dossier_temporaire",
         "dossier_resultat"
     )
 
-    print("PDF copiés :", pdf_copies)
+    print("PDF copiés :", len(pdf_copies),"\n Doublons trouvés : ",nbDoublon)
 
 
-main()
+if __name__ == "__main__":
+    main()
